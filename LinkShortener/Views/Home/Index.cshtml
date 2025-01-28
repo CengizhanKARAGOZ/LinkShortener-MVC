@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Link Shortener";
+}
+
+<h2>Link Shortener</h2>
+
+@if (!string.IsNullOrEmpty(ViewBag.Error))
+{
+    <div style="color: red">@ViewBag.Error</div>
+}
+
+@if (!string.IsNullOrEmpty(ViewBag.ShortUrl))
+{
+    <div style="color: green">Shortened URL: @Url.Action("RedirectToOriginal", "Home", new { shortCode = ViewBag.ShortUrl })</div>
+}
+
+<form method="post" action="@Url.Action("Shorten", "Home")">
+    <label for="originalUrl">Enter URL:</label>
+    <input type="text" name="originalUrl" id="originalUrl" required />
+    <button type="submit">Shorten</button>
+</form>
